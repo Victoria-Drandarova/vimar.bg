@@ -1,50 +1,8 @@
 <?php
 session_start();
-if(isset($_POST["add_in_cart"])) {
-    $name_brand = $_POST["hidden_tire"];
-    $season = $_POST["hidden_season"];
-    $size = $_POST["hidden_size"];
-    $quantity = 1;
-    $price = $_POST["hidden_price"];
-
-    $cart=array();
-    $cart = $_SESSION["cart"];
-    $product = array();
-    $product = ["name_brand"=> $name_brand, "season"=>$season, "size"=>$size, "quantity"=>$quantity, "price"=>$price];
-//    foreach ($cart as $products){
-//        foreach ($products as $product){
-//            if($product["name_brand"]==$name_brand){
-//                $product["quantity"]++;
-//            }else
-//            {
-////                $products[] = $product;
-////                var_dump($products);
-////                $cart[] = &$products;
-////                $_SESSION["cart"] = $cart;
-////                var_dump($cart);
-//            }
-//        }
-//    }
-//    $products[] = $product;
-//    var_dump($products);
-//    $cart[] = &$products;
-    $cart[]= $product;
-    $_SESSION["cart"] = $cart;
-//    var_dump($cart);
-
-
-//    $cart=$_SESSION["cart"];
-//    $_SESSION["name_brand"] = $_POST["hidden_tire"];
-//    $_SESSION["season"] = $_POST["hidden_season"];
-//    $_SESSION["size"] = $_POST["hidden_size"];
-//    $_SESSION["price"] = $_POST["hidden_price"];
-//    $cart=$_SESSION["name_brand"];
-//    $cart=$_SESSION["season"];
-//    $cart=$_SESSION["size"];
-//    $cart=$_SESSION["price"];
-
-
-
+if(empty($_SESSION["cart"])){
+    echo "Количката Ви е празна!";
+    die();
 }
 ?>
 <!doctype html>
@@ -78,12 +36,13 @@ if(isset($_POST["add_in_cart"])) {
                 <td><?= $product_in_cart["quantity"] ?></td>
                 <td><?= $product_in_cart["price"] ?></td>
                 <td>
-                    <form action="../Controller/gumiController.php" method="post"><input type="submit" name="buy"
-                                                                                         value="Купи"></form>
+                    <form action="../Controller/gumiController.php" method="post">
+                        <input type="submit" name="buy" value="Купи"></form>
                 </td>
                 <td>
-                    <form action="../Controller/gumiController.php" method="post"><input type="submit" name="delete"
-                                                                                         value="Откажи"></form>
+                    <form action="../Controller/gumiController.php" method="post">
+                        <input type="hidden" name="name_tire" value="<?= $product_in_cart["name_brand"] ?>">
+                        <input type="submit" name="delete" value="Откажи"></form>
                 </td>
             </tr>
             <?php
@@ -91,5 +50,12 @@ if(isset($_POST["add_in_cart"])) {
     }
             ?>
 </table>
+<h1>Общо за плащане: <?php
+    $total=0;
+    foreach($_SESSION["cart"] as $product_in_cart){
+        $total += $product_in_cart["price"];
+    }
+    echo $total;
+?>BGN</h1>
 </body>
 </html>

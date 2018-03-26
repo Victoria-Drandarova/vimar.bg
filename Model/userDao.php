@@ -39,16 +39,22 @@ function saveProfile($username, $email, $password,$id_user){
     }
 }
 
-function buyTire($tire1){
-    echo "##$tire1##";
-    require_once "../Model/dbmanager.php";
-    $statement = $pdo->prepare("SELECT * FROM tires Where `name_brand`= ?;");
-//    UPDATE `projectvm`.`tires` SET quantity=quantity-1  WHERE `name_brand`= ?
-    $statement->execute(array(trim($tire1)));
-    $data = array();
-    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-        $data[] = $row;
+//function buyTire($tire1){
+//    echo "##$tire1##";
+//    require_once "../Model/dbmanager.php";
+//    $statement = $pdo->prepare("SELECT * FROM tires Where `name_brand`= ?;");
+////    UPDATE `projectvm`.`tires` SET quantity=quantity-1  WHERE `name_brand`= ?
+//    $statement->execute(array(trim($tire1)));
+//    $data = array();
+//    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+//        $data[] = $row;
+//
+//    }
+//    echo json_encode($data);
+//}
 
-    }
-    echo json_encode($data);
+function buyTire($tire1){
+    require_once "../Model/dbmanager.php";
+    $statement = $pdo->prepare("UPDATE `projectvm`.`tires` SET quantity=quantity-1  WHERE `name_brand`= ?");
+    $statement->execute(array(trim($tire1)));
 }
