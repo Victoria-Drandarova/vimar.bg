@@ -1,0 +1,45 @@
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<!--<a href="../Controller/indexController.php?page=main" class="or">НАЧАЛО</a>-->
+<!--<a href="../Controller/indexController.php?page=logout" class="or">ИЗХОД</a>-->
+<link href="../View/assets/style.css" rel="stylesheet" type="text/css">
+
+<br><br><br>
+<p>Форма за справки и запитвания:
+    Свободен текст за запитване: Относно запитвания, препоръки, оплаквания и други, Ви молим да попълните следната форма за обратна връзка. Ще Ви отговорим при първа възможност. Сервизни услуги, авточасти, консумативи, консултация за автомобила, уговаряне на час за приемане, комплексни цени за ремонти и др.
+
+    При запитване за авточасти, ако разполагате с информация за каталожен или референтен оригинален номер на търсената авточаст, можете да я посочите в полето за свободен текст.
+
+    Ще получите отговор на Вашето запитване на посочения телефон или имейл адрес. </p>
+<p>Мнението Ви е важно за нас! </p>
+
+<div class="contact">
+    <form action="../Controller/indexController.php" method="post">
+        <label>Името Ви: </label>
+        <input type="text" name="name" placeholder="Името Ви..">
+
+        <label style="color: goldenrod">Email: </label>
+        <input  type="text" name="email" placeholder="Вашият Email..">
+        <label>Относно: </label><br>
+        <input  type="text" name="subject" placeholder="Относно..">
+        <label>Съобщение: </label><br>
+        <textarea style="color: goldenrod" name="message" cols="150" rows="4" placeholder="Кратно съобщение..."></textarea>
+
+
+        <input type="submit" value="Send your message">
+    </form>
+</div>
+</body>
+</html>

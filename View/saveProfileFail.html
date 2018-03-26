@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fail!</title>
+</head>
+<body>
+<h3>Saving profile failed!</h3>
+<div class="profitable">
+
+    <fieldset class="profitable">
+        <legend><h2>Профил</h2></legend>
+        <br><br>
+        <table class="profitable">
+            <form action="../Controller/indexController.php" method="post">
+
+                <tr>
+                    <td>Потребителско име: </td>  <td><input id="username" type="text" size="28" name="username" ></td>
+                </tr>
+                <tr>
+                    <td>Парола: </td><td><input id="password" type="password" size="28" name="password"></td>
+                </tr>
+                <tr>
+                    <td>Нова парола: </td><td><input id="new_password" type="password" size="28" name="new_password"></td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td> <td> <input id="email" type="email" size="28" name="email"></td>
+                </tr>
+                <td> <input id="profilesubmit" type="submit" name="save_profile" value="Запази промените"></td>
+
+            </form>
+        </table>
+        <img src="https://karlovobusiness.com/wp-content/uploads/2017/10/20-33.png">
+    </fieldset>
+
+    <br>
+    <br>
+</div>
+<p><a href="./profile.html">Try  Again!</a></p>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../View/assets/style.css">
+</head>
+<body>
+
+<div class="profitable">
+
+    <fieldset class="profitable">
+        <legend><h2>Профил</h2></legend>
+        <br><br>
+        <table class="profitable">
+            <form action="../Controller/saveProfileController.php" method="post">
+
+                <tr>
+                    <td>Потребителско име: </td>  <td><input id="username" type="text" size="28" name="username" ></td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td> <td> <input id="email" type="email" size="28" name="email"></td>
+                </tr>
+                <!--<tr>-->
+                <!--<td>Парола: </td><td><input id="password" type="password" size="28" name="password"></td>-->
+                <!--</tr>-->
+                <tr>
+                    <td>Нова парола: </td><td><input id="new_password" type="password" size="28" name="new_password"></td>
+                </tr>
+
+                <td> <input id="profilesubmit" type="submit" name="save_profile" value="Запази промените"></td>
+
+            </form>
+        </table>
+        <img src="https://karlovobusiness.com/wp-content/uploads/2017/10/20-33.png">
+    </fieldset>
+
+    <br>
+    <br>
+</div>
+<img src="https://karlovobusiness.com/wp-content/uploads/2017/10/20-33.png">
+
+<script>
+
+    var request = new XMLHttpRequest();
+    request.open("get", "../Controller/editProfileController.php");
+    request.onreadystatechange = function (ev) {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText)
+            var result = JSON.parse(this.responseText); //this.responseText e json, върнат от function getLoggedUserFromDB ($email) през editProfileController.php
+            console.log (result)
+
+
+            document.getElementById("username").setAttribute("value", result.username)
+//        document.getElementById("password").setAttribute("value", result.password)
+            document.getElementById("email").setAttribute("value", result.email)
+
+            //handle response
+//        var div = document.getElementById("weather");
+//        div.innerHTML = "";
+//        var result = JSON.parse(this.responseText);
+//        var ul = document.createElement("ul");
+//
+//        for (var key in result) {
+//            var li = document.createElement("li");
+//            li.innerHTML = key + ":  " + result[key];
+//            ul.appendChild(li);
+//        }
+//        div.appendChild(ul);
+        }
+    }
+    request.send();
+
+</script>
+
+</body>
+</html>
+
+
