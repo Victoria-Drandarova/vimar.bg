@@ -16,13 +16,7 @@ if($_SESSION["logged_user"]) {
 
         $cart = $_SESSION["cart"];
 
-    foreach ($cart as $guma) {
-        if (($guma["name_brand"]) == $name_brand) {
-        $guma[$quantity]++;
-        } else {
-        $product = ["name_brand" => $name_brand, "season" => $season, "size" => $size, "quantity" => $quantity, "price" => $price];
-    }
-    }
+
 
         $cart[]= $product;
         $_SESSION["cart"] = $cart;
@@ -41,15 +35,17 @@ else{
 
 }
 if(isset($_POST["delete"])){
-    $deleted_pr_name = $_POST["name_tire"];
+    $deleted_pr_name = htmlentities($_POST["name_tire"]);
 
     foreach ($_SESSION["cart"] as $item){
     if(isset($item[$deleted_pr_name])) { //ne raboti
 
-        $product_data = &$_SESSION["cart"][$deleted_pr_name];
-        unset($_SESSION["cart"][$deleted_pr_name]);
+        $product_data = &$_SESSION["cart"][$item][$deleted_pr_name];
+        unset($_SESSION["cart"][$item][$deleted_pr_name]);
     }
     }
   header("Location:../View/cart.php");
 
 }
+
+

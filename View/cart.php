@@ -1,10 +1,21 @@
 <?php
 session_start();
-if(empty($_SESSION["cart"])){
-    echo "Количката Ви е празна!";
+require_once "header.html";
+require_once "../View/nav_logged.html";
+
+if(empty($_SESSION["cart"])){?>
+    <link href="../View/assets/style.css" rel="stylesheet" type="text/css">
+
+    <h1><i>Количката Ви е празна!</i></h1>
+<?php
+//    echo "Количката Ви е празна!";
+    require_once "../View/footer.html";
     die();
 }
+
 ?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,7 +27,10 @@ if(empty($_SESSION["cart"])){
     <link href="../View/assets/style.css">
 </head>
 <body>
-<table border="1">
+<link href="../View/assets/new.css" rel="stylesheet" type="text/css">
+<section class="tprod">
+    <h2>Вие избрахте:</h2>
+<table class="products_table" border="1">
     <tr>
         <th>Марка</th>
         <th>Сезон</th>
@@ -49,6 +63,7 @@ if(empty($_SESSION["cart"])){
 
     }
             ?>
+
 </table>
 <h1>Общо за плащане: <?php
     $total=0;
@@ -57,5 +72,12 @@ if(empty($_SESSION["cart"])){
     }
     echo $total;
 ?>BGN</h1>
+
+</section>
+
+
 </body>
 </html>
+<?php
+require_once "footer.html";
+?>
