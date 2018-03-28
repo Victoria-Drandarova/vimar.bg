@@ -74,12 +74,13 @@ if(empty($_SESSION["cart"])){?>
         <td colspan="1"><input style="color: goldenrod; width: 100%" type="submit" name="buy" value="Купи"></td>
     </tr>
 </table>
-
-
     </form>
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d332a2c5b16591ccbf904d3f1011bfeec82cf703
 </section>
 
 

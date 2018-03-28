@@ -3,12 +3,13 @@ session_start();
 
 if($_SESSION["logged_user"]) {
     if (isset ($_POST["add_in_cart"])) {
-        $name_brand = $_POST["hidden_tire"];
-        $season = $_POST["hidden_season"];
-        $size = $_POST["hidden_size"];
-        $price = $_POST["hidden_price"];
+        $name_brand = htmlentities($_POST["hidden_tire"]);
+        $season = htmlentities($_POST["hidden_season"]);
+        $size = htmlentities($_POST["hidden_size"]);
+        $price = htmlentities($_POST["hidden_price"]);
         $quantity = 1;
 
+<<<<<<< HEAD
         $product = array();
         $product[];
 
@@ -21,23 +22,50 @@ if($_SESSION["logged_user"]) {
 
 
 
+=======
+        $new_product = array(
+            "name_brand"=>$name_brand,
+            "season" => $season,
+            "size" => $size,
+            "quantity" => $quantity,
+            "price" => $price);
+
+
+
+       if(!empty($_SESSION["cart"])){ //if not empty
+           //if the product exist, increase the quantity
+           if(isset($_SESSION["cart"][$name_brand]) == $name_brand){
+               $_SESSION["cart"][$name_brand]["quantity"]++;
+           } else{
+               //if the product is new, add it in cart
+               $_SESSION["cart"][$name_brand] = $new_product;
+           }
+       }else{
+           $_SESSION["cart"]=array();
+           $_SESSION["cart"][$name_brand] = $new_product;
+       }
+>>>>>>> d332a2c5b16591ccbf904d3f1011bfeec82cf703
         require_once "../Model/userDao.php";
         buyTire($_POST["hidden_tire"]);
       header("Location:../View/cart.php");
-
     }
-
 }
 else{
-
     header("location: ../Controller/indexController.php?page=buyFailed");
-
-
 }
 
-if(isset($_POST["delete"])){
-    $deleted_pr_name = htmlentities($_POST["name_tire"]);}
-
+if(isset($_POST["delete"])) {
+    $deleted_pr_name = htmlentities($_POST["name_tire"]);
+    if (isset($_SESSION["cart"][$deleted_pr_name])) {
+        $product_data = &$_SESSION["cart"][$deleted_pr_name];
+        if ($product_data["quantity"] > 1) {
+            $product_data["quantity"]--;
+        } else {
+            unset($_SESSION["cart"][$deleted_pr_name]);
+        }
+    }
+    header("Location:../View/cart.php");
+}
 
 
 
