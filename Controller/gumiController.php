@@ -60,4 +60,6 @@ if(isset($_POST["delete"])) {
 
 
 
-
+if(isset($_POST["buy"])){
+    header ("location: ../View/finalOrder.html");
+}
