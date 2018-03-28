@@ -10,7 +10,7 @@ if($_SESSION["logged_user"]) {
         $quantity = 1;
 
         $product = array();
-        $product[]
+        $product[];
 
         $_SESSION["cart"]=array();
         $_SESSION["cart"]["name_brand"] = array("season" => $season, "size" => $size, "quantity" => $quantity, "price" => $price);

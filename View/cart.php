@@ -52,10 +52,6 @@ if(empty($_SESSION["cart"])){?>
                 <td><?= $product_in_cart["size"] ?></td>
                 <td><?= $product_in_cart["quantity"] ?></td>
                 <td><?= $product_in_cart["price"] ?></td>
-<!--                <td>-->
-<!--                    <form action="../Controller/gumiController.php" method="post">-->
-<!--                        <input type="submit" name="buy" value="Купи"></form>-->
-<!--                </td>-->
                 <td>
                     <form action="../Controller/gumiController.php" method="post">
                         <input type="hidden" name="name_tire" value="<?= $product_in_cart["name_brand"] ?>">
@@ -82,13 +78,6 @@ if(empty($_SESSION["cart"])){?>
 
     </form>
 
-<!--    <h1>Общо за плащане: --><?php
-//        $total=0;
-//        foreach($_SESSION["cart"] as $product_in_cart){
-//            $total += $product_in_cart["price"];
-//        }
-//        echo $total;
-//        ?><!--BGN</h1>-->
 
 
 </section>
