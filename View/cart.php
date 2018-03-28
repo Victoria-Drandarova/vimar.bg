@@ -10,7 +10,7 @@ if(empty($_SESSION["cart"])){?>
     <h1><i>Количката Ви е празна!</i></h1>
 <?php
 //    echo "Количката Ви е празна!";
-    require_once "../View/staticFooter.html";
+    require_once "../View/footer.html";
     die();
 }
 
@@ -83,5 +83,5 @@ if(empty($_SESSION["cart"])){?>
 </body>
 </html>
 <?php
-require_once "../View/staticFooter.html";
+require_once "../View/footer.html";
 ?>

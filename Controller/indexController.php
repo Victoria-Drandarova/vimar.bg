@@ -46,12 +46,13 @@ if(isset($_GET["page"])){
     require_once "../View/nav_not_logged.html";
     require_once "../View/index.html";
 }
-if(isset($_GET["page"])){
-    if($_GET["page"]=="main"){
-        require_once "../View/footer.html";
-    }else{
-        require_once "../View/staticFooter.html";
-    }
-}else{
-    require_once "../View/footer.html";
-}
+require_once "../View/footer.html";
+//if(isset($_GET["page"])){
+//    if($_GET["page"]=="main"){
+//        require_once "../View/footer.html";
+//    }else{
+//        require_once "../View/staticFooter.html";
+//    }
+//}else{
+//    require_once "../View/footer.html";
+//}
