@@ -29,8 +29,10 @@ if(empty($_SESSION["cart"])){?>
 </head>
 <body>
 <link href="../View/assets/new.css" rel="stylesheet" type="text/css">
-<section class="tprod">
-    <h2>Вие избрахте:</h2>
+<link href="../View/assets/style.css" rel="stylesheet" type="text/css">
+<section class="tprod" style="margin-left: 28%; width: 100%">
+    <h2><i>Количката Ви съдържа следните продукти:</i></h2>
+    <form action="../Controller/gumiController.php" method="post">
 <table class="products_table" border="1">
     <tr>
         <th>Марка</th>
@@ -38,7 +40,7 @@ if(empty($_SESSION["cart"])){?>
         <th>Размер</th>
         <th>Количество</th>
         <th>Цена</th>
-        <th>Купи</th>
+
         <th>Откажи</th>
     </tr>
     <?php
@@ -50,29 +52,44 @@ if(empty($_SESSION["cart"])){?>
                 <td><?= $product_in_cart["size"] ?></td>
                 <td><?= $product_in_cart["quantity"] ?></td>
                 <td><?= $product_in_cart["price"] ?></td>
-                <td>
-                    <form action="../Controller/gumiController.php" method="post">
-                        <input type="submit" name="buy" value="Купи"></form>
-                </td>
+<!--                <td>-->
+<!--                    <form action="../Controller/gumiController.php" method="post">-->
+<!--                        <input type="submit" name="buy" value="Купи"></form>-->
+<!--                </td>-->
                 <td>
                     <form action="../Controller/gumiController.php" method="post">
                         <input type="hidden" name="name_tire" value="<?= $product_in_cart["name_brand"] ?>">
-                        <input type="submit" name="delete" value="Откажи"></form>
+                        <input style="color: goldenrod" type="submit" name="delete" value="Откажи"></form>
                 </td>
             </tr>
+
             <?php
 
     }
             ?>
-
+    <tr>
+        <td colspan="5"> <h3>Общо за плащане: <?php
+            $total=0;
+            foreach($_SESSION["cart"] as $product_in_cart){
+                $total += $product_in_cart["price"]*$product_in_cart["quantity"];
+            }
+            echo $total;
+            ?>BGN</h3></td>
+        <td colspan="1"><input style="color: goldenrod; width: 100%" type="submit" name="buy" value="Купи"></td>
+    </tr>
 </table>
-<h1>Общо за плащане: <?php
-//    $total=0;
-    foreach($_SESSION["cart"] as $product_in_cart){
-        $total += $product_in_cart["price"];
-    }
-    echo $total;
-?>BGN</h1>
+
+
+    </form>
+
+<!--    <h1>Общо за плащане: --><?php
+//        $total=0;
+//        foreach($_SESSION["cart"] as $product_in_cart){
+//            $total += $product_in_cart["price"];
+//        }
+//        echo $total;
+//        ?><!--BGN</h1>-->
+
 
 </section>
 
