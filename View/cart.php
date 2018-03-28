@@ -76,11 +76,7 @@ if(empty($_SESSION["cart"])){?>
 </table>
     </form>
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> d332a2c5b16591ccbf904d3f1011bfeec82cf703
 </section>
 
 

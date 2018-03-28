@@ -8,21 +8,6 @@ if($_SESSION["logged_user"]) {
         $size = htmlentities($_POST["hidden_size"]);
         $price = htmlentities($_POST["hidden_price"]);
         $quantity = 1;
-
-<<<<<<< HEAD
-        $product = array();
-        $product[];
-
-        $_SESSION["cart"]=array();
-        $_SESSION["cart"]["name_brand"] = array("season" => $season, "size" => $size, "quantity" => $quantity, "price" => $price);
-
-
-
-
-
-
-
-=======
         $new_product = array(
             "name_brand"=>$name_brand,
             "season" => $season,
@@ -44,7 +29,7 @@ if($_SESSION["logged_user"]) {
            $_SESSION["cart"]=array();
            $_SESSION["cart"][$name_brand] = $new_product;
        }
->>>>>>> d332a2c5b16591ccbf904d3f1011bfeec82cf703
+
         require_once "../Model/userDao.php";
         buyTire($_POST["hidden_tire"]);
       header("Location:../View/cart.php");
@@ -76,5 +61,5 @@ if(isset($_POST["delete"])) {
 
 
 if(isset($_POST["buy"])){
-    header ("location: ../View/finalOrder.html");
+    header ("location: ../Controller/indexController.php?page=finalOrder");
 }
