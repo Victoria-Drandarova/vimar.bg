@@ -1,22 +1,171 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Title</title>-->
+
+<!--</head>-->
+
+<!--<body>-->
+<!--<link href="../View/assets/new.css" rel="stylesheet" type="text/css">-->
+
+<!--<section class="tprod" style="margin-top: 6%">-->
+
+
+   <!---->
+    <!--<table class="products_table" border="1">-->
+        <!--<tr>-->
+
+            <!--<th>Марка</th>-->
+            <!--<th>Сезон</th>-->
+            <!--<th>Размер</th>-->
+            <!--<th>Наличност</th>-->
+            <!--<th>Цена BGN</th>-->
+            <!--<th>Добави в количка</th>-->
+
+           <!---->
+        <!--</tr>-->
+        <!--<tbody id="data"></tbody>-->
+
+    <!--</table>-->
+
+    <!--<script>-->
+
+        <!--//xmlhttprequest-->
+        <!--//get -> gumicontroller-->
+        <!--//handle response - > json s gumi-->
+        <!--//for each guma in json-->
+        <!--//get table add row with columns with values from guma-->
+        <!--debugger;-->
+        <!--var ajax = new XMLHttpRequest();-->
+        <!--var method = "GET";-->
+        <!--var url = "../Model/dataWinter.php";-->
+        <!--var asynchronous = true;-->
+        <!--ajax.open(method, url, asynchronous);-->
+        <!--ajax.send();-->
+        <!--ajax.onreadystatechange = function () {-->
+            <!--if (this.readyState == 4 && this.status == 200) {-->
+                <!--var data = JSON.parse(this.responseText);-->
+                <!--console.log(data);-->
+                <!--var html = "";-->
+                <!--for (var a = 0; a < data.length; a++) {-->
+                    <!--var name_brand = data[a].name_brand;-->
+                    <!--var season = data[a].season;-->
+                    <!--var size = data[a].size;-->
+                    <!--var quantity = data[a].quantity;-->
+                    <!--var price = data[a].price;-->
+
+                    <!--html += "<tr>";-->
+                    <!--html += "<td>" + name_brand + "</td>";-->
+                    <!--html += "<td>" + season + "</td>";-->
+                    <!--html += "<td>" + size + "</td>";-->
+                    <!--html += "<td>" + quantity + "</td>";-->
+                    <!--html += "<td>" + price + "</td>";-->
+                    <!--html += "<td>" +-->
+                                <!--"<form action='../Controller/gumiController.php' method='post'>" +-->
+                                    <!--"<input type='hidden' name='hidden_tire' value=' " + name_brand + " '  >" +-->
+                                    <!--"<input type='hidden' name='hidden_size' value=' " + size + " '  >" +-->
+                                    <!--"<input type='hidden' name='hidden_season' value=' " + season + " '  > " +-->
+                                    <!--"<input type='hidden' name='hidden_price' value=' " + price + " '  >" +-->
+                                    <!--"<input style='color: goldenrod' type='submit' name='add_in_cart' value='Добави в количка'>" +-->
+                                <!--"</form>" +-->
+                            <!--"</td>";-->
+
+
+                    <!--html += "</tr>";-->
+                <!--}-->
+                <!--document.getElementById("data").innerHTML = html;-->
+            <!--}-->
+
+        <!--}-->
+
+    <!--</script>-->
+
+<!--</section>-->
+
+<!--</body>-->
+
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        #wrap {
+            width:  40%;
+            max-width: 600px;
+            margin: 50px auto;
+            background: gainsboro;
+            box-sizing:  border-box;
+            padding:  20px;
 
+            background-image: url(http://www.mikrofond.bg/wp-content/uploads/MFD_desktop_slide_4_2000.png);
+            background-size:  cover;
+            background-attachment: fixed;
+            background-position:  center;
+            margin-top: 0%;
+            box-shadow: 32px 16px 120px goldenrod;
+            border: 8px solid grey;
+            border-radius: 30px;
+            float: right;
+            margin-right: 2%;
+        ;
+        }
+
+        #left, #modsearch2 {
+            display:  inline-block;
+            width: 49%;
+            vertical-align: top;
+        }
+        #searchmod1 {
+            background: grey;
+            padding:  10px 0;
+        }
+
+        #left input {
+            width: 98%;
+        }
+
+        #left {
+            text-align:  center;
+
+
+        }
+
+        #left ul, #modsearch2 ul {
+            text-align: left;
+        }
+
+        #searchmod1 ul li img {
+            display: inline-block;
+            float:  right;
+        }
+
+        #searchmod1 ul li {
+            width: 97%;
+            margin: 15px 0;
+            cursor:  pointer;
+        }
+        #searchmod1 ul li:hover {
+            color: goldenrod;
+            text-decoration:  underline;
+        }
+
+    </style>
 </head>
 
 <body>
-<link href="../View/assets/new.css" rel="stylesheet" type="text/css">
+<section class="tprod">
 
-<section class="tprod" style="margin-top: 6%">
+
 
 
     <!--<table id="gumi">-->
 
 
     <!--</table>-->
-    <table class="products_table" border="1">
+    <table class="products_table" border="1" style="width: 55%">
         <tr>
 
             <th>Марка</th>
@@ -42,7 +191,7 @@
         debugger;
         var ajax = new XMLHttpRequest();
         var method = "GET";
-        var url = "../Model/dataWinter.php";
+        var url = "../Model/data.php";
         var asynchronous = true;
         ajax.open(method, url, asynchronous);
         ajax.send();
@@ -59,20 +208,19 @@
                     var price = data[a].price;
 
                     html += "<tr>";
-                    html += "<td>" + name_brand + "</td>";
+                    html += "<td id='dali'>" + name_brand + "</td>";
                     html += "<td>" + season + "</td>";
                     html += "<td>" + size + "</td>";
                     html += "<td>" + quantity + "</td>";
                     html += "<td>" + price + "</td>";
-                    html += "<td>" +
-                                "<form action='../Controller/gumiController.php' method='post'>" +
-                                    "<input type='hidden' name='hidden_tire' value=' " + name_brand + " '  >" +
-                                    "<input type='hidden' name='hidden_size' value=' " + size + " '  >" +
-                                    "<input type='hidden' name='hidden_season' value=' " + season + " '  > " +
-                                    "<input type='hidden' name='hidden_price' value=' " + price + " '  >" +
-                                    "<input style='color: goldenrod' type='submit' name='add_in_cart' value='Добави в количка'>" +
-                                "</form>" +
-                            "</td>";
+                    html += "<td>" + "" +
+                        "<form action='../Controller/gumiController.php' method='post'>" +
+                        "<input type='hidden' name='hidden_tire' value=' " +name_brand+  " '  >" +
+                        "<input type='hidden' name='hidden_size' value=' " +size+  " '  >" +
+                        "<input type='hidden' name='hidden_season' value=' " +season+  " '  > " +
+                        "<input type='hidden' name='hidden_price' value=' " +price+  " '  >" +
+                        "<input style='color: goldenrod' type='submit'  name='add_in_cart' value='Добави в количка'></form>" + "</td>";
+
 
 
                     html += "</tr>";
@@ -85,22 +233,105 @@
     </script>
 
 </section>
-<!--<div id="wrap">-->
 
-<!--<div id="left">-->
-<!--<h4>Въведете марка гума за повече информация: </h4>-->
-<!--<input type="text" id="loc" oninput="getCountry(this)" placeholder="Въведете марка гума...."name="search">-->
 
-<!--<div class="fr" style="visibility: hidden" id="first1"></div>-->
+
+
+<div id="wrap">
+
+    <div id="left">
+        <h4>Въведете марка гума за повече информация: </h4>
+        <input type="text" oninput="getCountry(this)" placeholder="Въведете марка гума...."name="search">
+
+        <div style="visibility: hidden" id="searchmod1"></div>
+    </div>
+    <div style="visibility: hidden" id="modsearch2"></div>
+    <script src="../View/main.js"></script>
+</div>
+
+
+
+
+<!--<section class="tiretable">-->
+<!--<div class="tprod">-->
+
+
+
+
+<!--&lt;!&ndash;<table id="gumi">&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;</table>&ndash;&gt;-->
+<!--<table class="products_table" border="1">-->
+<!--<tr>-->
+
+<!--<th>Марка</th>-->
+<!--<th>Сезон</th>-->
+<!--<th>Размер</th>-->
+<!--<th>Наличност</th>-->
+<!--<th>Цена BGN</th>-->
+<!--<th>Добави в количка</th>-->
+
+<!--&lt;!&ndash;<td><button>kupi</button></td>&ndash;&gt;-->
+<!--</tr>-->
+<!--<tbody id="data"></tbody>-->
+
+<!--</table>-->
+
+<!--<script>-->
+
+<!--//xmlhttprequest-->
+<!--//get -> gumicontroller-->
+<!--//handle response - > json s gumi-->
+<!--//for each guma in json-->
+<!--//get table add row with columns with values from guma-->
+<!--debugger;-->
+<!--var ajax = new XMLHttpRequest();-->
+<!--var method = "GET";-->
+<!--var url = "../Model/data.php";-->
+<!--var asynchronous = true;-->
+<!--ajax.open(method, url, asynchronous);-->
+<!--ajax.send();-->
+<!--ajax.onreadystatechange = function () {-->
+<!--if (this.readyState == 4 && this.status == 200) {-->
+<!--var data = JSON.parse(this.responseText);-->
+<!--console.log(data);-->
+<!--var html = "";-->
+<!--for (var a = 0; a < data.length; a++) {-->
+<!--var name_brand = data[a].name_brand;-->
+<!--var season = data[a].season;-->
+<!--var size = data[a].size;-->
+<!--var quantity = data[a].quantity;-->
+<!--var price = data[a].price;-->
+
+<!--html += "<tr>";-->
+<!--html += "<td id='dali'>" + name_brand + "</td>";-->
+<!--html += "<td>" + season + "</td>";-->
+<!--html += "<td>" + size + "</td>";-->
+<!--html += "<td>" + quantity + "</td>";-->
+<!--html += "<td>" + price + "</td>";-->
+<!--html += "<td>" + "" +-->
+<!--"<form action='../Controller/gumiController.php' method='post'>" +-->
+<!--"<input type='hidden' name='hidden_tire' value=' " +name_brand+  " '  >" +-->
+<!--"<input type='hidden' name='hidden_size' value=' " +size+  " '  >" +-->
+<!--"<input type='hidden' name='hidden_season' value=' " +season+  " '  > " +-->
+<!--"<input type='hidden' name='hidden_price' value=' " +price+  " '  >" +-->
+<!--"<input style='color: goldenrod' type='submit'  name='add_in_cart' value='Добави в количка'></form>" + "</td>";-->
+
+
+
+<!--html += "</tr>";-->
+<!--}-->
+<!--document.getElementById("data").innerHTML = html;-->
+<!--}-->
+
+<!--}-->
+
+<!--</script>-->
 
 <!--</div>-->
-<!--<div style="visibility: hidden" id="second2"></div>-->
+<!--</section>-->
 
-<!--<script src="../View/main.js"></script>-->
-<!--</div>-->
-<!--<div>-->
-<!--&lt;!&ndash;  <img width="55%" style="padding-top: 25%" src="http://www.mikrofond.bg/wp-content/uploads/MFD_desktop_slide_4_2000.png">&ndash;&gt;-->
-<!--</div>-->
-</body>
 
-</html>
+<!--</body>-->
+<!--</html>-->

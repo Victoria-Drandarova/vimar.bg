@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 session_start();
 require_once "header.html";
 require_once "../View/nav_logged.html";
@@ -9,7 +10,7 @@ if(empty($_SESSION["cart"])){?>
     <h1><i>Количката Ви е празна!</i></h1>
 <?php
 //    echo "Количката Ви е празна!";
-    require_once "../View/footer.html";
+    require_once "../View/staticFooter.html";
     die();
 }
 
@@ -66,7 +67,7 @@ if(empty($_SESSION["cart"])){?>
 
 </table>
 <h1>Общо за плащане: <?php
-    $total=0;
+//    $total=0;
     foreach($_SESSION["cart"] as $product_in_cart){
         $total += $product_in_cart["price"];
     }
@@ -79,5 +80,5 @@ if(empty($_SESSION["cart"])){?>
 </body>
 </html>
 <?php
-require_once "footer.html";
+require_once "../View/staticFooter.html";
 ?>

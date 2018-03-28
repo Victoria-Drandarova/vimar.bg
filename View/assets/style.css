@@ -255,6 +255,7 @@ html,body{
     height: auto;
     background-color:whitesmoke;
 }
+
 /*button home(kashtichka*/
 .btn {
     background-color: grey;
@@ -393,13 +394,15 @@ html,body{
     margin-top: 2%;
     display: inline-block;
     float: left;
+
 }
 #secondinner{
 
     height:30%;
     background-color: gainsboro;
     padding-top: 1%;
-    padding-left: 4%
+    padding-left: 4%;
+
 }
 #third{
     width:30%;
@@ -411,6 +414,7 @@ html,body{
     border-color: goldenrod;
     margin-top: 2%;
     display: inline-block;
+
 }
 #thirdinner{
 
@@ -418,18 +422,23 @@ html,body{
     background-color: gainsboro;
     padding-top: 1%;
     padding-left: 4%;
+
 }
 #firstpar{
     padding-left: 3%;
     padding-right:3%;
+
 }
 #secondpar{
     padding-left: 4%;
     padding-right: 4%;
+
 }
 #thirdpar {
     padding-left: 4%;
     padding-right: 4%;
+
+
 }
 #f{
     display: inline-block;
@@ -448,6 +457,7 @@ html,body{
     display: inline-block;
     float: left;
 
+
 }
 #inner {
 
@@ -455,6 +465,7 @@ html,body{
     background-color: gainsboro;
     padding-top: 1%;
     padding-left: 4%;
+
 }
 
 
