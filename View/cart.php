@@ -69,7 +69,7 @@ if(empty($_SESSION["cart"])){?>
 <h1>Общо за плащане: <?php
 //    $total=0;
     foreach($_SESSION["cart"] as $product_in_cart){
-        $total += $product_in_cart["price"];
+        $total += $product_in_cart["price"]*$product_in_cart["quantity"];
     }
     echo $total;
 ?>BGN</h1>
