@@ -53,8 +53,3 @@ function saveProfile($username, $email, $password,$id_user){
 //    echo json_encode($data);
 //}
 
-function buyTire($tire1){
-    require_once "../Model/dbmanager.php";
-    $statement = $pdo->prepare("UPDATE `projectvm`.`tires` SET quantity=quantity-1  WHERE `name_brand`= ?");
-    $statement->execute(array(trim($tire1)));
-}
