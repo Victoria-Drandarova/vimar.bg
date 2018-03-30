@@ -22,7 +22,6 @@ if ($db_quantity==0){
 
 }
 
-
        if(!empty($_SESSION["cart"])){ //if not empty
            //if the product exist, increase the quantity
            if(isset($_SESSION["cart"][$name_brand]) == $name_brand){
@@ -39,11 +38,12 @@ if ($db_quantity==0){
         require_once "../Model/tireDao.php";
         buyTire($_POST["hidden_tire"]);
       header("Location:../View/cart.php");
+    }else{
+            header("Location:../Controller/indexController.php?page=outOfStock");
+        }
     }
     else{
             header ("location:../Controller/indexController.php?page=outOfStock");
-
-    }
     }
 }
 else{
@@ -88,12 +88,3 @@ if(isset($_POST["finalOrder"])) {
     }
     header("Location:../Controller/indexController.php?page=successOrder");
 }
-
-
-
-
-
-
-
-
-
