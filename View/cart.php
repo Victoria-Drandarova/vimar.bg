@@ -76,7 +76,6 @@ if(empty($_SESSION["cart"])){?>
 </table>
     </form>
 
-
 </section>
 
 

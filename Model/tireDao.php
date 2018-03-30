@@ -12,9 +12,22 @@ function returnTire($deleted_pr_name){
     $statement->execute(array(trim($deleted_pr_name)));
 }
 
-//function deleteRow($name_brand){
-//    require_once "../Model/dbmanager.php";
-//    $statement = $pdo->prepare("DELETE FROM `projectvm`.`tires` WHERE `name_brand`= ?");
-//    $statement->execute(array(trim($name_brand)));
-//}
+function exitTire($deleted_pr_name){
+    $quantity = $_SESSION['cart'][$deleted_pr_name]['quantity'];
+    require_once "../Model/dbmanager.php";
+    $statement = $pdo->prepare("UPDATE `projectvm`.`tires` SET quantity = quantity + $quantity WHERE `name_brand`= ? ");
+    $statement->execute(array(trim($deleted_pr_name)));
+}
+
+function insertInCart ($email, $name_brand, $season, $size, $quantity, $price, $time){
+    require_once "../Model/dbmanager.php";
+    $statement = $pdo->prepare("INSERT INTO orders (user_email, name_brand, season, size, quantity, price, time)        
+                                VALUES (?,?,?,?,?,?,?)");
+
+    if ($statement->execute(array($email, $name_brand, $season, $size, $quantity, $price, $time))) {
+        return true;
+    } else {
+        return false;
+    }
+}
 

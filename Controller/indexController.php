@@ -3,6 +3,17 @@ session_start();
 require_once "../View/header.html";
 
 if (isset($_GET["page"]) && $_GET["page"] == "logout") { //ако е натиснат някой линк и линкът log out, унищожи сесията
+
+    if(!empty($_SESSION["cart"])) {
+            foreach ($_SESSION["cart"] as $product) {
+                $deleted_pr_name = $product["name_brand"];
+                $quantity = $product["quantity"];
+                require_once "../Model/tireDao.php";
+                exitTire($deleted_pr_name);
+                unset($_SESSION["cart"][$deleted_pr_name]);
+            }
+    }
+
     session_destroy();
     header("location:../Controller/indexController.php?page=main"); //пренасочи потребителя към log in
     die();   // прекрати изпълнението на какъвто и да е следващ скрипт, защото няма смисъл да продължава след като се е логаутнал

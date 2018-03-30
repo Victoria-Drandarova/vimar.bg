@@ -3,20 +3,24 @@ session_start();
 
 if($_SESSION["logged_user"]) {
     if (isset ($_POST["add_in_cart"])) {
-        if(($_POST["hidden_quantity"])>0){
-        $name_brand = htmlentities($_POST["hidden_tire"]);
-        $season = htmlentities($_POST["hidden_season"]);
-        $size = htmlentities($_POST["hidden_size"]);
-        $db_quantity = htmlentities($_POST["hidden_quantity"]);
-        $price = htmlentities($_POST["hidden_price"]);
-        $quantity = 1;
-        $new_product = array(
-            "name_brand"=>$name_brand,
-            "season" => $season,
-            "size" => $size,
-            "quantity" => $quantity,
-            "price" => $price);
+        if(($_POST["hidden_quantity"])>0) {
+            $name_brand = htmlentities($_POST["hidden_tire"]);
+            $season = htmlentities($_POST["hidden_season"]);
+            $size = htmlentities($_POST["hidden_size"]);
+            $price = htmlentities($_POST["hidden_price"]);
+            $db_quantity = htmlentities($_POST["hidden_quantity"]);
+            $quantity = 1;
+            $new_product = array(
+                "name_brand" => $name_brand,
+                "season" => $season,
+                "size" => $size,
+                "quantity" => $quantity,
+                "price" => $price);
 
+if ($db_quantity==0){
+    require_once "../Model/tireDao.php";
+
+}
 
        if(!empty($_SESSION["cart"])){ //if not empty
            //if the product exist, increase the quantity
@@ -37,6 +41,9 @@ if($_SESSION["logged_user"]) {
     }else{
             header("Location:../Controller/indexController.php?page=outOfStock");
         }
+    }
+    else{
+            header ("location:../Controller/indexController.php?page=outOfStock");
     }
 }
 else{
@@ -62,3 +69,23 @@ if(isset($_POST["buy"])){
     header ("location: ../Controller/indexController.php?page=finalOrder");
 }
 
+if(isset($_POST["finalOrder"])) {
+    $email = $_SESSION["logged_user"];
+
+    foreach ($_SESSION["cart"] as $product) {
+        $name_brand = $product["name_brand"];
+        $season = $product["season"];
+        $size = $product["size"];
+        $quantity = $product["quantity"];
+        $price = $product["price"]*$quantity;
+        $time = time();
+
+        require_once "../Model/tireDao.php";
+        insertInCart ($email, $name_brand, $season, $size, $quantity, $price, $time);
+
+        unset($_SESSION["cart"][$name_brand]);
+
+    }
+
+    header("Location:../Controller/indexController.php?page=successOrder");
+}
