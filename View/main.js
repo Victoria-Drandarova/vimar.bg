@@ -1,5 +1,5 @@
 function getCountry(pole) {
-    var div = document.getElementById("first");
+    var div = document.getElementById("searchmod1");
     div.innerHTML = "";
     if (pole.value === "") {
         div.style.visibility = "visibility";
@@ -28,7 +28,7 @@ function getCountry(pole) {
                     li.appendChild(flag);
                     ul.appendChild(li);
                     li.onclick = function (ev2) {
-                        var div2 = document.getElementById("second");
+                        var div2 = document.getElementById("search-info");
                         div2.innerHTML = "";
                         //var content = this.innerHTML;
                         var content = this.getElementsByClassName("Cname")[0].textContent;

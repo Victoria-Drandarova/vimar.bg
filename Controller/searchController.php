@@ -7,7 +7,7 @@ if (isset ($_GET["search"])) {
     $result = array();
     foreach ($data as $item) {
 
-        if (stristr($item["name"], $criteria)) {
+        if (strpos($item["name"], $criteria) == 0) {
             $result[$item["name"]] = ["name"=>$item["name"],"flag"=>$item["flag"]];
             $idx++;
             if ($idx > 5) {

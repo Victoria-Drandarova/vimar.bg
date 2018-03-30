@@ -11,7 +11,7 @@
         <legend><h2>Моля попълнете следната форма, за да финализирате поръчката:</h2></legend>
         <br><br>
         <table border="2">
-            <form action="../Controller/indexController.php?page=successOrder" method="post">
+            <form action="../Controller/gumiController.php" method="post">
                 <link rel="stylesheet" href="../View/assets/style.css">
                 <TR>
                     <TD>Потребителско име : </TD>  <TD><input id="username" type="text" size="28" name="username" ></TD>
@@ -47,6 +47,7 @@
                 document.getElementById("username").setAttribute("value", result.username)
 //        document.getElementById("password").setAttribute("value", result.password)
                 document.getElementById("email").setAttribute("value", result.email)
+
 
                 //handle response
 //        var div = document.getElementById("weather");

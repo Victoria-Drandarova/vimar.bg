@@ -3,6 +3,7 @@ session_start();
 require_once "../Model/userDao.php";
 
 $email= $_SESSION["logged_user"];
+
 try{
     $function_result = getLoggedUserFromDB($email);
     $_SESSION["id_user"] = $function_result["id_user"];
