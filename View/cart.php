@@ -31,7 +31,9 @@ if(empty($_SESSION["cart"])){?>
 <link href="../View/assets/new.css" rel="stylesheet" type="text/css">
 <link href="../View/assets/style.css" rel="stylesheet" type="text/css">
 <section class="tprod" style="margin-left: 28%; width: 100%">
-    <h2><i>Количката Ви съдържа следните продукти:</i></h2>
+    <h2 id="user"><i>
+            <script src="hello.js"></script>
+        </i></h2>
     <form action="../Controller/gumiController.php" method="post">
 <table class="products_table" border="1">
     <tr>

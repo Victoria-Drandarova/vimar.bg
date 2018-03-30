@@ -18,12 +18,12 @@ function exitTire($deleted_pr_name){
     $statement->execute(array(trim($deleted_pr_name)));
 }
 
-function insertInCart ($email, $name_brand, $season, $size, $quantity, $price, $time){
+function insertInCart ($email, $name_brand, $season, $size, $quantity, $price){
     require_once "../Model/dbmanager.php";
     $statement = $pdo->prepare("INSERT INTO orders (user_email, name_brand, season, size, quantity, price, time)        
-                                VALUES (?,?,?,?,?,?,?)");
+                                VALUES (?,?,?,?,?,?,NOW())");
 
-    if ($statement->execute(array($email, $name_brand, $season, $size, $quantity, $price, $time))) {
+    if ($statement->execute(array($email, $name_brand, $season, $size, $quantity, $price))) {
         return true;
     } else {
         return false;

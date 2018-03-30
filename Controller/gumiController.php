@@ -86,7 +86,6 @@ if(isset($_POST["finalOrder"])) {
         unset($_SESSION["cart"][$name_brand]);
 
     }
-
     header("Location:../Controller/indexController.php?page=successOrder");
 }
 
