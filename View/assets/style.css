@@ -745,6 +745,20 @@ td {
     margin-left: 2%;
 
 }
+.btnE {
+    background-color: goldenrod;
+    border: black;
+    color: white;
+    padding:4px 6px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius:10%;
+}
+
+/* Darker background on mouse-over */
+.btnE:hover {
+    background-color:grey;
+}
 /*css pole more information*/
 /*#wrap {*/
     /*width:  40%;*/

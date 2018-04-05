@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Your order has been accepted successfully. Thank you for trusting on Vimar.bg</h1>
+
+<section class="tprod">
+
+    <table class="products_table" border="1" style="width: 55%">
+        <tr>
+
+            <th>Brand</th>
+            <th>Season</th>
+            <th>Size</th>
+            <th>Quantity</th>
+            <th>Price BGN</th>
+            <th>Date of order</th>
+        </tr>
+        <tbody id="data"></tbody>
+
+    </table>
+
+    <script>
+
+        //xmlhttprequest
+        //get -> gumicontroller
+        //handle response - > json s gumi
+        //for each guma in json
+        //get table add row with columns with values from guma
+        debugger;
+        var ajax = new XMLHttpRequest();
+        var method = "GET";
+        var url = "../Model/historyData.php";
+        var asynchronous = true;
+        ajax.open(method, url, asynchronous);
+        ajax.send();
+        ajax.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                console.log(data);
+                var html = "";
+                for (var a = 0; a < data.length; a++) {
+                    var name_brand = data[a].name_brand;
+                    var season = data[a].season;
+                    var size = data[a].size;
+                    var quantity = data[a].quantity;
+                    var price = data[a].price;
+                    var time=data[a].time;
+
+                    html += "<tr>";
+                    html += "<td id='dali'>" + name_brand + "</td>";
+                    html += "<td>" + season + "</td>";
+                    html += "<td>" + size + "</td>";
+                    html += "<td>" + quantity + "</td>";
+                    html += "<td>" + price + "</td>";
+                    html += "<td>" + time + "</td>";
+                    html += "</tr>";
+                }
+                document.getElementById("data").innerHTML = html;
+            }
+
+        }
+
+    </script>
+
+</section>
+
+
+</body>
+</html>

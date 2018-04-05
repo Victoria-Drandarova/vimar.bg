@@ -38,6 +38,7 @@
 
 #left ul, #modsearch2 ul {
     text-align: left;
+    background-color: gainsboro;
 }
 
 #searchmod1 ul li img {

@@ -1,0 +1,46 @@
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<!--<a href="../Controller/indexController.php?page=main" class="or">НАЧАЛО</a>-->
+<!--<a href="../Controller/indexController.php?page=logout" class="or">ИЗХОД</a>-->
+<link href="../View/assets/style.css" rel="stylesheet" type="text/css">
+
+<br><br><br>
+<p>References and inquiries form:
+    Free Inquiry Text: For inquiries, recommendations, complaints, etc., please fill out the following form of feedback. We will
+    answer as soon as possible. Service, auto parts, consumables, vehicle consultation, negotiation of reception hours, complex
+    repair prices, etc. In case of auto parts inquiries, if you have information about a catalog or reference original number of
+    the requested auto parts, you can specify it in the free text box.
+
+    You will receive an answer to your inquiry on the phone or email address given. </p>
+<p> Your opinion is important to us! </p>
+
+<div class="contact">
+    <form action="../Controller/indexController.php" method="post">
+        <label>Your name: </label>
+        <input type="text" name="name" placeholder="Your name..">
+
+        <label style="color: goldenrod">Email: </label>
+        <input  type="text" name="email" placeholder="Your Email..">
+        <label>About: </label><br>
+        <input  type="text" name="subject" placeholder="About..">
+        <label>Message: </label><br>
+        <textarea style="color: goldenrod" name="message" cols="150" rows="4" placeholder="Message..."></textarea>
+
+
+        <input type="submit" value="Send your message">
+    </form>
+</div>
+</body>
+</html>

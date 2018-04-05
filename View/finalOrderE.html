@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="register">
+    <fieldset>
+        <legend><h2>Please complete the following form to finalize the order:</h2></legend>
+        <br><br>
+        <table border="2">
+            <form action="../Controller/gumiControllerE.php" method="post">
+                <link rel="stylesheet" href="../View/assets/style.css">
+                <TR>
+                    <TD>Username : </TD>  <TD><input id="username" type="text" size="28" name="username" ></TD>
+                </TR>
+                <TR>
+                    <TD>E-mail : </TD><TD><input id="email" type="text" size="28" name="email" ></TD>
+                </TR>
+                <TR>
+                    <TD>Address :</TD><td><input type="text"  size="28" name="address" ></input></td>
+                </TR>
+
+                <TR>
+                    <TD>Cart number :</TD> <TD> <input type="number" size="28" name="email"></TD>
+                </TR>
+                <TD COLSPAN="2"> <input type="submit" name="finalOrder" value="Send the order"></TD>
+
+            </form>
+        </table>
+    </fieldset>
+    <br>
+    <br>
+    <script>
+
+        var request = new XMLHttpRequest();
+        request.open("get", "../Controller/editProfileControllerE.php");
+        request.onreadystatechange = function (ev) {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText)
+                var result = JSON.parse(this.responseText); //this.responseText e json, върнат от function getLoggedUserFromDB ($email) през editProfileController.php
+                console.log (result)
+
+
+                document.getElementById("username").setAttribute("value", result.username)
+//        document.getElementById("password").setAttribute("value", result.password)
+                document.getElementById("email").setAttribute("value", result.email)
+
+
+                //handle response
+//        var div = document.getElementById("weather");
+//        div.innerHTML = "";
+//        var result = JSON.parse(this.responseText);
+//        var ul = document.createElement("ul");
+//
+//        for (var key in result) {
+//            var li = document.createElement("li");
+//            li.innerHTML = key + ":  " + result[key];
+//            ul.appendChild(li);
+//        }
+//        div.appendChild(ul);
+            }
+        }
+        request.send();
+
+    </script>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+</body>
+</html>
+
