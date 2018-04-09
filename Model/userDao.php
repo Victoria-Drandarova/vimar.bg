@@ -1,13 +1,21 @@
 <?php
 function loginUser($email, $password){
-    require_once "../Model/dbmanager.php";
+    require "../Model/dbmanager.php";
     $statement = $pdo->prepare("SELECT COUNT(*) as broi FROM users WHERE email = ? AND password = ?");
     $statement->execute(array($email, $password));
     $result = $statement->fetch();
     return $result["broi"] > 0;
 }
+function userExist($email){
+    require "../Model/dbmanager.php";
+    $statement = $pdo->prepare("SELECT COUNT(*) as broi FROM users WHERE email = ?");
+    $statement->execute(array($email));
+    $result = $statement->fetch();
+    return $result["broi"];
+}
+
 function isAdmin($email){
-    require_once "../Model/dbmanager.php";
+    require "../Model/dbmanager.php";
     $pdo = null;
     try {
         $pdo = new PDO("mysql:host=" . DB_IP . ":" . DB_PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
@@ -26,7 +34,7 @@ function isAdmin($email){
 
 function registerUser($username, $email, $password)
 {
-    require_once "../Model/dbmanager.php";
+    require "../Model/dbmanager.php";
     $statement = $pdo->prepare("INSERT INTO users (username, password, email)         VALUES (?,?,?)");
 
     if ($statement->execute(array($username, $password, $email))) {
@@ -36,7 +44,7 @@ function registerUser($username, $email, $password)
     }
 }
 function getLoggedUserFromDB ($email) {
-    require_once "../Model/dbmanager.php";
+    require "../Model/dbmanager.php";
     $statement = $pdo->prepare("SELECT * FROM users WHERE email= ? ");
     $statement->execute(array($email));
     $result = $statement->fetch(PDO::FETCH_ASSOC);
@@ -45,7 +53,7 @@ function getLoggedUserFromDB ($email) {
 }
 
 function saveProfile($username, $email, $password,$id_user){
-    require_once "../Model/dbmanager.php";
+    require "../Model/dbmanager.php";
     $statement = $pdo->prepare("UPDATE users SET username = ?, email = ?, password =? WHERE id_user = ?");
 
     if ($statement->execute(array($username, $email, $password, $id_user))) {

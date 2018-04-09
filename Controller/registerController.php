@@ -1,36 +1,56 @@
 <?php
 session_start();
-require_once "../Model/userDao.php";
+require_once "../View/header.html";
+require_once "../Model/userDao.php";?>
+<html><a href="../Controller/indexController.php?page=register">Назад</a> <br><br></html>
 
-if(isset($_POST["register"])) {
-    $error = false;
+<?php
+if (isset($_POST["register"])) {
+    $errors = array();
+
     $user = array();
     $email = htmlentities($_POST["email"]);
     $username = htmlentities($_POST["username"]);
-    $password = htmlentities($_POST["password1"]);  //две пароли ли ще имаме при регистрация??
+    $password_1 = htmlentities($_POST["password1"]);
+    $password_2 = htmlentities($_POST["password2"]);//две пароли ли ще имаме при регистрация??
 
-    if (empty($email) || empty($username) || empty($password)) {
-        $error = "Всички полета са задължителни!";
+    if (empty($username)) {
+        array_push($errors, "Липсва потребителско име!");
     }
-    if (mb_strlen($username) < 2){
-        $error = "Потребителското име може да бъде най-малко от две букви!";
+    if (empty($email)) {
+        array_push($errors, "Липсва email!");
     }
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        $error = "Невалиден email!";
+    if (empty($password_1)) {
+        array_push($errors, "Липсва парола!");
     }
-    if (isset($error) && $error) { // $error e от  if (isset($_POST["register"]) този иф, ако е сетната и е true да изпишем ГРЕШКА
-        echo "<h1>$error</h1>";    //и да си остане пак на регистър, докато се регистрира правилно
-        //require_once "../View/register.html";
+    if ($password_1 != $password_2) {
+        array_push($errors, "Паролите не съвпадат!");
     }
-    try {
-        if (registerUser($username, $email, sha1($password))) {
-            header("Location: ../Controller/indexController.php?page=login");
-        } else {
-            require_once "../View/registerFail.html";
+    if (mb_strlen($username) < 2) {
+        array_push($errors, "Потребителското име може да бъде най-малко от две букви!");
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        array_push($errors, "Невалиден email!");
+    }
+    if (userExist($email) > 0) { //try catch
+        array_push($errors, "Този email вече има регистрация.");
+    }
+    if (count($errors) == 0) {
+        try {
+            if (registerUser($username, $email, sha1($password_1))) {
+                header("Location: ../Controller/indexController.php?page=login");
+            } else {
+                require_once "../View/registerFail.html";
+            }
+        } catch (PDOException $e) {
+            require_once "../View/error.html";
+            print_r($e);
         }
-    }
-    catch (PDOException $e){
-        require_once "../View/error.html";
-        print_r($e);
+    } else {
+        foreach ($errors as $error) {
+            echo $error."<br>";
+        }
+
     }
 }
+require_once "../View/footer.html";

@@ -18,17 +18,16 @@
             <form action="../Controller/registerController.php" method="post">
                 <link rel="stylesheet" href="../View/assets/style.css">
                 <TR>
-                    <TD style="color: goldenrod">Потребителско име : </TD>  <TD><input type="text" size="28" name="username" ></TD>
+                    <TD style="color: goldenrod">Потребителско име : </TD>  <TD><input type="text" size="28" name="username"></TD>
                 </TR>
-                <TR>
-                    <TD style="color: goldenrod">Парола : </TD><TD><input type="password" size="28" name="password1" ></TD>
-                </TR>
-                <TR>
-                    <TD style="color: goldenrod" >Повторете паролата :</TD> <TD><input type="password" size="28" name="password2" ></TD>
-                </TR>
-
                 <TR>
                     <TD style="color: goldenrod">E-mail :</TD> <TD> <input type="email" size="28" name="email"></TD>
+                </TR>
+                <TR>
+                    <TD style="color: goldenrod">Парола : </TD><TD><input type="password" size="28" name="password1"></TD>
+                </TR>
+                <TR>
+                    <TD style="color: goldenrod" >Повторете паролата :</TD> <TD><input type="password" size="28" name="password2"></TD>
                 </TR>
                 <TD COLSPAN="2"> <input type="submit" name="register" value="Регистрация"></TD>
 
@@ -41,7 +40,7 @@
 </div>
 <br>
 <div id="ok">
-    <a href="login.html" class="or">Вече имам направена регистрация</a></div>
+    <a href="../Controller/indexController.php?page=login" class="or">Вече имам направена регистрация</a></div>
 
 
 </body>
