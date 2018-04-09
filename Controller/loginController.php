@@ -11,8 +11,14 @@ if(isset($_POST["login"])){
     try {
         if (loginUser ($email, sha1($password))) {
             $_SESSION["logged_user"] = $email;
-            require_once "../View/nav_logged.html";
-            require_once "../View/main.html";
+            // ako e admin da otiva na adminska stranica
+            if(isAdmin($email)){
+               // require_once "../View/nav_admin.html";
+                header("location: ../View/adminPage.php");
+            }else {
+                //ako ne e admin da si e kakto do sega
+                header("location: ../Controller/indexController.php?page=main");
+            }
         } else {
             require_once "../View/loginFailed.html";
         }

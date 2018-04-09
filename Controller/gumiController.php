@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if($_SESSION["logged_user"]) {
+if ($_SESSION["logged_user"]) {
     if (isset ($_POST["add_in_cart"])) {
-        if(($_POST["hidden_quantity"])>0) {
+        if (($_POST["hidden_quantity"]) > 0) {
             $name_brand = htmlentities($_POST["hidden_tire"]);
             $season = htmlentities($_POST["hidden_season"]);
             $size = htmlentities($_POST["hidden_size"]);
@@ -17,38 +17,27 @@ if($_SESSION["logged_user"]) {
                 "quantity" => $quantity,
                 "price" => $price);
 
-if ($db_quantity==0){
-    require_once "../Model/tireDao.php";
+            if (!empty($_SESSION["cart"])) { //if not empty
+                //if the product exist, increase the quantity
+                if (isset($_SESSION["cart"][$name_brand]) == $name_brand) {
+                    $_SESSION["cart"][$name_brand]["quantity"]++;
+                } else {
+                    //if the product is new, add it in cart
+                    $_SESSION["cart"][$name_brand] = $new_product;
+                }
+            } else {
+                $_SESSION["cart"] = array();
+                $_SESSION["cart"][$name_brand] = $new_product;
+            }
 
-}
-
-       if(!empty($_SESSION["cart"])){ //if not empty
-           //if the product exist, increase the quantity
-           if(isset($_SESSION["cart"][$name_brand]) == $name_brand){
-               $_SESSION["cart"][$name_brand]["quantity"]++;
-           } else{
-               //if the product is new, add it in cart
-               $_SESSION["cart"][$name_brand] = $new_product;
-           }
-       }else{
-           $_SESSION["cart"]=array();
-           $_SESSION["cart"][$name_brand] = $new_product;
-       }
-
-        require_once "../Model/tireDao.php";
-        buyTire($_POST["hidden_tire"]);
-      header("Location:../View/cart.php");
-    }else{
+            require_once "../Model/tireDao.php";
+            buyTire($_POST["hidden_tire"]);
+            header("Location:../View/cart.php");
+        } else {
             header("Location:../Controller/indexController.php?page=outOfStock");
         }
     }
-    else{
-            header ("location:../Controller/indexController.php?page=outOfStock");
-    }
-}
-else{
-    header("location: ../Controller/indexController.php?page=buyFailed");
-}
+
 
 if(isset($_POST["delete"])) {
     $deleted_pr_name = htmlentities($_POST["name_tire"]);
@@ -87,4 +76,78 @@ if(isset($_POST["finalOrder"])) {
 
     }
     header("Location:../Controller/indexController.php?page=successOrder");
+}
+
+if(isset($_POST["save_changes"])){
+    $error = false;
+    $id = htmlentities($_POST["id"]);
+    $nameBrand = htmlentities($_POST["nameBrand"]);
+    $season = htmlentities($_POST["season"]);
+    $size = htmlentities($_POST["size"]);
+    $quantity = htmlentities($_POST["quantity"]);
+    $price = htmlentities($_POST["price"]);
+
+    if (empty($tireName)  || empty($season) || empty($size) || empty($quantity) || empty($price)) {
+        $error = "All fields must be filled";
+    }
+    if($error != false){
+        echo "<h1>$error</h1>";
+    }
+
+    try {
+        require_once "../Model/tireDao.php";
+        saveTireInDB($nameBrand, $season, $size, $quantity, $price, $id);
+        header ("location: ../View/adminPage.php");
+
+    }
+    catch (PDOException $e){
+        require_once "../View/error.html";
+    }
+}
+
+if(isset($_POST["adminDelete"])){
+    $id = $_POST["hidden_id"];
+    $nameBrand = $_POST["hidden_tire"];
+    $size  = $_POST["hidden_size"];
+    $season  = $_POST["hidden_season"];
+    $quantity  = $_POST["hidden_quantity"];
+    $price  = $_POST["hidden_price"];
+
+    try {
+        require_once "../Model/tireDao.php";
+        deleteTireFromDB($id);
+        header ("location: ../View/adminPage.php");
+
+    }
+    catch (PDOException $e){
+        require_once "../View/error.html";
+    }
+}
+
+if(isset($_POST["addTireInDB"])){
+    $nameBrand = htmlentities($_POST["nameBrand"]);
+    $season  = htmlentities($_POST["season"]);
+    $size  = htmlentities($_POST["size"]);
+    $quantity  = htmlentities($_POST["quantity"]);
+    $price  = htmlentities($_POST["price"]);
+
+    $error="";
+    if (empty($nameBrand) || empty($season) || empty($size) || empty($quantity) || empty($price)) {
+        $error = "Всички полета са задължителни!";
+        require_once "../View/addTire.php";
+}
+
+    try {
+        require_once "../Model/tireDao.php";
+        addTireInDB($nameBrand, $season, $size, $quantity, $price);
+        header ("location: ../View/adminPage.php");
+
+    }
+    catch (PDOException $e){
+        require_once "../View/error.html";
+    }
+}
+
+} else {
+    header("location: ../Controller/indexController.php?page=buyFailed");
 }

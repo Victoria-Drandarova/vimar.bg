@@ -6,7 +6,23 @@ function loginUser($email, $password){
     $result = $statement->fetch();
     return $result["broi"] > 0;
 }
+function isAdmin($email){
+    require_once "../Model/dbmanager.php";
+    $pdo = null;
+    try {
+        $pdo = new PDO("mysql:host=" . DB_IP . ":" . DB_PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
+        $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
+    }
+    catch (PDOException $e){
+        echo "Problem with db query  - " . $e->getMessage();
+    }
+
+    $statement = $pdo->prepare("SELECT COUNT(*) as broi FROM users WHERE email = ? AND admin = '1' ");
+    $statement->execute(array($email));
+    $result = $statement->fetch();
+    return $result["broi"] > 0;
+}
 
 function registerUser($username, $email, $password)
 {
@@ -39,17 +55,4 @@ function saveProfile($username, $email, $password,$id_user){
     }
 }
 
-//function buyTire($tire1){
-//    echo "##$tire1##";
-//    require_once "../Model/dbmanager.php";
-//    $statement = $pdo->prepare("SELECT * FROM tires Where `name_brand`= ?;");
-////    UPDATE `projectvm`.`tires` SET quantity=quantity-1  WHERE `name_brand`= ?
-//    $statement->execute(array(trim($tire1)));
-//    $data = array();
-//    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-//        $data[] = $row;
-//
-//    }
-//    echo json_encode($data);
-//}
 

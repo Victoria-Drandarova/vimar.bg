@@ -1,23 +1,35 @@
+<?php
+require_once "adminHeader.html"
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="../View/assets/searchMenu.css" rel="stylesheet">
+    <link href="../View/menuservices.js" rel="stylesheet" type="text/css">
+    <link href="../View/assets/menuservices.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+<nav id="head">
+    <a href="../View/adminPage.php" class="or navbutton">ВСИЧКИ ГУМИ  </a>
+    <a href="addTire.php" class="or navbutton">ДОБАВИ</a>
+    <a href="../Controller/indexController.php?page=logout" class="or navbutton">ИЗХОД</a>
+</nav>
+
 <section class="tprod">
 
     <table class="products_table" border="1" style="width: 55%">
         <tr>
-
+            <th>ID номер</th>
             <th>Марка</th>
             <th>Сезон</th>
             <th>Размер</th>
             <th>Наличност</th>
             <th>Цена BGN</th>
-            <th>Добави в количка</th>
+            <th>Промени</th>
+            <th>Изтрий</th>
 
         </tr>
         <tbody id="data"></tbody>
@@ -34,7 +46,7 @@
         debugger;
         var ajax = new XMLHttpRequest();
         var method = "GET";
-        var url = "../Model/dataSummer.php";
+        var url = "../Model/dataTires.php";
         var asynchronous = true;
         ajax.open(method, url, asynchronous);
         ajax.send();
@@ -44,6 +56,7 @@
                 console.log(data);
                 var html = "";
                 for (var a = 0; a < data.length; a++) {
+                    var id_tire = data[a].id_tires;
                     var name_brand = data[a].name_brand;
                     var season = data[a].season;
                     var size = data[a].size;
@@ -51,21 +64,37 @@
                     var price = data[a].price;
 
                     html += "<tr>";
-                    html += "<td id='dali'>" + name_brand + "</td>";
+                    html += "<td>" + id_tire + "</td>";
+                    html += "<td>" + name_brand + "</td>";
                     html += "<td>" + season + "</td>";
                     html += "<td>" + size + "</td>";
                     html += "<td>" + quantity + "</td>";
                     html += "<td>" + price + "</td>";
                     html += "<td>" + "" +
-                        "<form action='../Controller/gumiController.php' method='post'>" +
+                        "<form action='../View/changeTireData.php' method='post'>" +
+                        "<input type='hidden' name='hidden_id' value=' " +id_tire+  " '  >" +
                         "<input type='hidden' name='hidden_tire' value=' " +name_brand+  " '  >" +
-                        "<input type='hidden' name='hidden_size' value=' " +size+  " '  >" +
                         "<input type='hidden' name='hidden_season' value=' " +season+  " '  > " +
+                        "<input type='hidden' name='hidden_size' value=' " +size+  " '  >" +
                         "<input type='hidden' name='hidden_quantity' value=' " +quantity+  " '  >" +
                         "<input type='hidden' name='hidden_price' value=' " +price+  " '  >" +
 
                         "<input style='color: goldenrod' type='submit'  " +
-                        "name='add_in_cart' value='Добави в количка'></form>" + "</td>";
+                        "name='makeChanges' value='Направи промяна'>" +
+                        "</form>" + "</td>";
+
+                    html += "<td>" + "" +
+                        "<form action='../Controller/gumiController.php' method='post'>" +
+                        "<input type='hidden' name='hidden_id' value=' " +id_tire+  " '  >" +
+                        "<input type='hidden' name='hidden_tire' value=' " +name_brand+  " '  >" +
+                        "<input type='hidden' name='hidden_season' value=' " +season+  " '  > " +
+                        "<input type='hidden' name='hidden_size' value=' " +size+  " '  >" +
+                        "<input type='hidden' name='hidden_quantity' value=' " +quantity+  " '  >" +
+                        "<input type='hidden' name='hidden_price' value=' " +price+  " '  >" +
+
+                        "<input style='color: goldenrod' type='submit'  " +
+                        "name='adminDelete' value='Изртий'>" +
+                        "</form>" + "</td>";
 
 
 
@@ -80,24 +109,9 @@
 
 </section>
 
-
-
-
-<div id="wrap">
-
-    <div id="left">
-        <h4>Въведете марка гума за повече информация: </h4>
-        <div class="searchHolder">
-            <input id="searchBar" type="text" oninput="getCountry(this)" placeholder="Въведете марка гума...."name="search">
-            <div style="visibility: hidden" id="searchmod1"></div>
-        </div>
-
-        <div style="visibility: hidden" id="search-info"></div>
-
-    </div>
-    <div style="visibility: hidden" id="modsearch2"></div>
-    <script src="../View/main.js"></script>
-</div>
-
 </body>
 </html>
+
+<?php
+require_once "footer.html"
+?>

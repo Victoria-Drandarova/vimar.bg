@@ -31,3 +31,26 @@ function insertInCart ($email, $name_brand, $season, $size, $quantity, $price){
     }
 }
 
+function saveTireInDB ($nameBrand, $season, $size, $quantity, $price, $id){
+    require_once "../Model/dbmanager.php";
+    $statement = $pdo->prepare("UPDATE tires SET name_brand = ?, season = ?, size = ?, quantity = ?, price = ?   WHERE id_tires = ?");
+
+    if ($statement->execute(array($nameBrand, $season, $size, $quantity, $price, $id))) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function deleteTireFromDB($id){
+    require_once "../Model/dbmanager.php";
+    $statement = $pdo->prepare("DELETE FROM tires WHERE id_tires = ?");
+    $statement->execute(array(trim($id)));
+}
+
+function addTireInDB($nameBrand, $season, $size, $quantity, $price){
+    require_once "../Model/dbmanager.php";
+    $statement = $pdo->prepare("INSERT INTO tires (name_brand, season, size, quantity, price)  
+                                VALUES(?, ?, ?, ?, ?)");
+    $statement->execute(array($nameBrand, $season, $size, $quantity, $price));
+}

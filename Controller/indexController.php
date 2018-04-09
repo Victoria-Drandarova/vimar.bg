@@ -41,6 +41,7 @@ if (isset($error) && $error) { // $error e от  if (isset($_POST["register"]) �
 //    else{
 //       require_once "login.php";
 //    }
+
 if(isset($_GET["page"])){
     $page_name = $_GET["page"];
     if(isset($_SESSION["logged_user"])){
@@ -58,12 +59,3 @@ if(isset($_GET["page"])){
     require_once "../View/index.html";
 }
 require_once "../View/footer.html";
-//if(isset($_GET["page"])){
-//    if($_GET["page"]=="main"){
-//        require_once "../View/footer.html";
-//    }else{
-//        require_once "../View/staticFooter.html";
-//    }
-//}else{
-//    require_once "../View/footer.html";
-//}
